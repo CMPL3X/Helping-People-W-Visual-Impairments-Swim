@@ -10,3 +10,6 @@ Motori :
     Kreisais - GPIO 22
     Labais - GPIO 27
     Vidējais - GPIO 17
+
+
+if while installing packages, with pip, env error, use "--break-system-packages" at the end of the terminal line
