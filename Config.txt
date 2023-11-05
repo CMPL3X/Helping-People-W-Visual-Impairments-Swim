@@ -13,3 +13,12 @@ Motori :
 
 
 if while installing packages, with pip, env error, use "--break-system-packages" at the end of the terminal line
+
+
+Instalation (prob will need "--break-system-packages" at the end) :
+    1 ) pip install teachable-machine
+    2 ) pip install opencv-python
+    3 ) git clone https://github.com/letmaik/pyvirtualcam --recursive
+    4 ) cd pyvirtualcam
+    5 ) pip install .
+    6 ) pip install pynput
