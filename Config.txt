@@ -1,0 +1,8 @@
+Ar raspberry pi W vai >= pi 3B+
+Mazāks un ir labāk
+ar mazu powerbank
+
+Motori :
+    Kreisais - GPIO 22
+    Labais - GPIO 27
+    Vidējais - GPIO 17
