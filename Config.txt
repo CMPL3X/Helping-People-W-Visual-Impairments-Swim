@@ -2,6 +2,10 @@ Ar raspberry pi W vai >= pi 3B+
 Mazāks un ir labāk
 ar mazu powerbank
 
+uztaisit mazu kastiti ar bezvadu connectoru vai ari wireless charging .. un sledzi, ka ari jauzliek rasp ka on boot
+
+leave and forget .. visu pats izdara
+
 Motori :
     Kreisais - GPIO 22
     Labais - GPIO 27
