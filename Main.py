@@ -25,8 +25,8 @@ GPIO.setwarnings(False)
 
 # Motor PWM frequency and duty cycle
 PWM_FREQ = 100
-PWM_DUTY_CYCLE_40 = 40
-PWM_DUTY_CYCLE_70 = 70
+PWM_DUTY_CYCLE_40 = 60
+PWM_DUTY_CYCLE_70 = 80
 PWM_DUTY_CYCLE_100 = 100
 
 # Setup motors
