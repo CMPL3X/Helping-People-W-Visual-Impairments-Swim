@@ -1,6 +1,8 @@
 from keras.models import load_model
 import cv2
 import numpy as np
+import RPi.GPIO as GPIO
+import time
 
 #-------------------------Settings------------------------
 
@@ -10,7 +12,34 @@ camera = cv2.VideoCapture(1)
 # Show live webcamera image window on screen
 showimage = False
 
+# Motor pins (GPIO)
+GPIO_MOTOR_R = 22
+GPIO_MOTOR_L = 27
+GPIO_MOTOR_2 = 17
+
 #---------------------------------------------------------
+
+# Initialize GPIO
+GPIO.setmode(GPIO.BCM)
+
+# Motor PWM frequency and duty cycle
+PWM_FREQ = 100
+PWM_DUTY_CYCLE_40 = 40
+PWM_DUTY_CYCLE_70 = 70
+PWM_DUTY_CYCLE_100 = 100
+
+# Setup motors
+GPIO.setup(GPIO_MOTOR_R, GPIO.OUT)
+GPIO.setup(GPIO_MOTOR_L, GPIO.OUT)
+GPIO.setup(GPIO_MOTOR_2, GPIO.OUT)
+
+motor_r = GPIO.PWM(GPIO_MOTOR_R, PWM_FREQ)
+motor_l = GPIO.PWM(GPIO_MOTOR_L, PWM_FREQ)
+motor_2 = GPIO.PWM(GPIO_MOTOR_2, PWM_FREQ)
+
+motor_r.start(0)
+motor_l.start(0)
+motor_2.start(0)
 
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
@@ -67,24 +96,39 @@ while True:
     #    for i in range(10):
     #        print("Executing first loop for model1 class 1")
     #        # Add your code for the first loop here
-#
+
     #elif index_model1 == 1:
     #    # Second loop for model1 class 2
     #    for i in range(10):
     #        print("Executing second loop for model1 class 2")
     #        # Add your code for the second loop here
-#
+
     #if index_model2 == 0:
     #    # Third loop for model2 class 1
     #    for i in range(10):
     #        print("Executing third loop for model2 class 1")
     #        # Add your code for the third loop here
-#
+
     #elif index_model2 == 1:
     #    # Fourth loop for model2 class 2
     #    for i in range(10):
     #        print("Executing fourth loop for model2 class 2")
     #        # Add your code for the fourth loop here
+
+    # Use the predictions to control motors
+    if class_name_model1 == "R":
+        motor_r.ChangeDutyCycle(100)
+        motor_l.ChangeDutyCycle(0)
+    elif class_name_model1 == "L":
+        motor_r.ChangeDutyCycle(0)
+        motor_l.ChangeDutyCycle(100)
+
+    if class_name_model2 == "2":
+        motor_2.ChangeDutyCycle(PWM_DUTY_CYCLE_40)
+    elif class_name_model2 == "3":
+        motor_2.ChangeDutyCycle(PWM_DUTY_CYCLE_70)
+    elif class_name_model2 == "4":
+        motor_2.ChangeDutyCycle(PWM_DUTY_CYCLE_100)
 
     # Listen to the keyboard for presses.
     keyboard_input = cv2.waitKey(1)
@@ -93,5 +137,11 @@ while True:
     if keyboard_input == 27:
         break
 
+camera.release()
+cv2.destroyAllWindows()
+motor_r.stop()
+motor_l.stop()
+motor_2.stop()
+GPIO.cleanup()
 camera.release()
 cv2.destroyAllWindows()

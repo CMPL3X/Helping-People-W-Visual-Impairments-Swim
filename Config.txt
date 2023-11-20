@@ -21,3 +21,6 @@ Instalation (prob will need "--break-system-packages" at the end) :
     3 ) git clone https://github.com/letmaik/pyvirtualcam --recursive
     4 ) cd pyvirtualcam
     5 ) pip install .
+    6 ) pip install RPi.GPIO
+
+get file with "git clone https://github.com/CMPL3X/Helping-People-W-Visual-Impairments-Swim.git"
