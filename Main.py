@@ -6,8 +6,8 @@ import time
 
 #-------------------------Settings------------------------
 
-# Check and change camera port with "cameraPortTest.py"!
-camera = cv2.VideoCapture(1)
+# Check and change camera port with "cameraPortTest.py"! Default is 0
+camera = cv2.VideoCapture(0)
 
 # Show live webcamera image window on screen
 showimage = False
@@ -21,6 +21,7 @@ GPIO_MOTOR_2 = 17
 
 # Initialize GPIO
 GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 
 # Motor PWM frequency and duty cycle
 PWM_FREQ = 100
@@ -45,14 +46,14 @@ motor_2.start(0)
 np.set_printoptions(suppress=True)
 
 # Load the first model
-model1 = load_model("CorrModel\\Corr_model.h5", compile=False)
+model1 = load_model("CorrModel/Corr_model.h5", compile=False)
 
 # Load the second model
-model2 = load_model("DistModel\\Dist_model.h5", compile=False)
+model2 = load_model("DistModel/Dist_model.h5", compile=False)
 
 # Load the labels for both models
-class_names_model1 = open("CorrModel\\labels.txt", "r").readlines()
-class_names_model2 = open("DistModel\\labels.txt", "r").readlines()
+class_names_model1 = open("CorrModel/labels.txt", "r").readlines()
+class_names_model2 = open("DistModel/labels.txt", "r").readlines()
 
 while True:
     # Grab the web camera's image.
@@ -139,6 +140,8 @@ while True:
 
 camera.release()
 cv2.destroyAllWindows()
+
+# Clean up GPIO
 motor_r.stop()
 motor_l.stop()
 motor_2.stop()
