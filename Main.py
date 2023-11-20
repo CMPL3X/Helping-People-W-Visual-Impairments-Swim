@@ -2,6 +2,16 @@ from keras.models import load_model
 import cv2
 import numpy as np
 
+#-------------------------Settings------------------------
+
+# Check and change camera port with "cameraPortTest.py"!
+camera = cv2.VideoCapture(1)
+
+# Show live webcamera image window on screen
+showimage = False
+
+#---------------------------------------------------------
+
 # Disable scientific notation for clarity
 np.set_printoptions(suppress=True)
 
@@ -15,9 +25,6 @@ model2 = load_model("DistModel\\Dist_model.h5", compile=False)
 class_names_model1 = open("CorrModel\\labels.txt", "r").readlines()
 class_names_model2 = open("DistModel\\labels.txt", "r").readlines()
 
-# CAMERA can be 0 or 1 based on the default camera of your computer
-camera = cv2.VideoCapture(1)
-
 while True:
     # Grab the web camera's image.
     ret, image = camera.read()
@@ -26,7 +33,8 @@ while True:
     image = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)
 
     # Show the image in a window
-    cv2.imshow("Webcam Image", image)
+    if showimage == True :
+        cv2.imshow("Webcam Image", image)
 
     # Make the image a numpy array and reshape it to the models' input shape.
     image = np.asarray(image, dtype=np.float32).reshape(1, 224, 224, 3)
