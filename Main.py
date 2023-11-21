@@ -91,7 +91,7 @@ while True:
     print("Model 2 - Class:", class_name_model2[2:], end="")
     print("Confidence Score:", str(np.round(confidence_score_model2 * 100))[:-2], "%")
 
-    ## Use the predictions to determine which loop to activate
+    # THIS IS USED IF YOU WANT TO TEST WITH COMPUTER
     #if index_model1 == 0:
     #    # First loop for model1 class 1
     #    for i in range(10):
